@@ -1,0 +1,50 @@
+.workspace-header > div a { display: inline-flex; align-items: center; gap: 6px; }
+.workspace-actions, .settings-button-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.workspace-view-tabs { display: flex; gap: 5px; margin-bottom: 25px; border-bottom: 1px solid var(--line); }
+.workspace-view-tabs button { border: 0; border-bottom: 2px solid transparent; background: none; padding: 12px 15px; min-height: 44px; font-size: 12px; color: var(--muted); }
+.workspace-view-tabs button.active { color: var(--blue); border-bottom-color: var(--blue); }
+.workspace-project { display: flex; flex-direction: column; }
+.workspace-project-meta { flex: 1; }
+.workspace-project-actions { display: flex; gap: 5px; padding: 0 14px 13px; border-top: 1px solid #e8e9e3; padding-top: 8px; }
+.workspace-project-actions button { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-width: 34px; min-height: 36px; border: 0; background: transparent; border-radius: 5px; font-size: 10px; }
+.workspace-project-actions button:hover { background: #2447e80a; color: var(--blue); }
+.workspace-project-actions button:last-child { margin-left: auto; }
+.account-settings { max-width: 1150px; }
+.settings-section { padding-block: 35px 45px; border-top: 1px solid var(--line); }
+.settings-section h2 { font-size: 32px; font-weight: 500; letter-spacing: -1px; margin: 14px 0 12px; }
+.settings-section > div > p { max-width: 660px; color: var(--muted); font-size: 13px; line-height: 1.9; }
+.settings-usage { display: flex; flex-wrap: wrap; gap: 20px; margin: 25px 0; align-items: center; font-size: 12px; }
+.settings-usage b { padding: 6px 12px; background: #e9edde; color: #536542; border-radius: 5px; }
+.settings-plan-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-block: 28px 20px; }
+.settings-plan-grid article { padding: 25px; background: #fff8; border: 1px solid #dedfd7; border-radius: 10px; }
+.settings-plan-grid h3 { font-size: 21px; font-weight: 500; }
+.settings-plan-grid article > p { font-size: 11px; margin-top: 7px; color: var(--muted); }
+.settings-plan-grid ul { padding: 0; margin: 22px 0; list-style: none; display: grid; gap: 10px; }
+.settings-plan-grid li { display: flex; align-items: start; gap: 8px; font-size: 11px; }
+.settings-plan-grid li svg { flex-shrink: 0; color: #536542; margin-top: 3px; }
+.settings-plan-grid .button { width: 100%; min-height: 44px; padding: 10px; }
+.settings-muted { display: block; color: #626875; font-size: 11px; line-height: 1.8; margin-block: 14px; }
+.settings-connections { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 25px; }
+.settings-connections article { border: 1px solid var(--line); padding: 25px; background: #fff6; border-radius: 10px; }
+.settings-connections h3 { font-size: 18px; margin-top: 13px; font-weight: 500; }
+.settings-connections article > div > span { color: var(--muted); font-size: 12px; display: block; margin-block: 6px 18px; }
+.settings-connections .button { min-height: 44px; padding: 10px 15px; }
+.settings-readiness { max-width: 680px; margin-top: 25px; }
+.settings-readiness > div { display: flex; justify-content: space-between; gap: 18px; border-bottom: 1px solid var(--line); padding-block: 15px; font-size: 12px; }
+.settings-readiness b { font-weight: 500; color: #536542; }
+.portfolio-preview-bar button { border: 1px solid #8d9e8055; border-radius: 4px; padding: 6px 9px; background: transparent; color: inherit; font-size: 10px; cursor: pointer; }
+@media (max-width: 800px) {
+  .settings-plan-grid { grid-template-columns: 1fr; }
+  .settings-connections { grid-template-columns: 1fr; }
+  .settings-section h2 { font-size: 28px; }
+}
+@media (max-width: 580px) {
+  .workspace-title { flex-direction: column; }
+  .workspace-title .button { margin-top: 0; min-height: 44px; font-size: 11px; padding-inline: 14px; }
+  .workspace-view-tabs button { font-size: 11px; padding-inline: 12px; }
+  .workspace-project-actions button { min-width: 44px; min-height: 44px; }
+  .workspace-header > div { gap: 12px; }
+  .workspace-header > div a:first-child { display: none; }
+  .settings-usage { gap: 14px; font-size: 11px; }
+  .settings-readiness > div { font-size: 11px; }
+}

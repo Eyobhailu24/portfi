@@ -1,0 +1,247 @@
+
+.template-preview {
+  --mini-accent: #536542;
+  background: #f9f8f4;
+  color: #242720;
+  container-type: inline-size;
+  padding: 0 7%;
+  line-height: 1.6;
+}
+.mini-nav {
+  height: 61px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #24272020;
+  font-size: 7.5px;
+}
+.mini-nav>b {
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: -.4px;
+}
+.mini-nav sup {
+  font-size: 5px;
+  margin-left: 2px;
+}
+.mini-hero {
+  padding: 43px 0 35px;
+}
+.mini-kicker {
+  color: var(--mini-accent);
+  font-size: 6px;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.mini-kicker:before {
+  content: '';
+  width: 3px;
+  height: 3px;
+  background: var(--mini-accent);
+  border-radius: 50%;
+}
+.mini-hero h3 {
+  font-size: clamp(20px,6.8cqw,52px);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -1.5px;
+  margin-top: 18px;
+}
+.mini-hero h3 em {
+  font: inherit;
+  color: var(--mini-accent);
+}
+.mini-description {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  margin-top: 22px;
+  gap: 20px;
+}
+.mini-description p {
+  max-width: 230px;
+  font-size: 7.5px;
+  color: inherit;
+  opacity: .65;
+  line-height: 1.9;
+}
+.mini-description>span {
+  display: grid;
+  place-items: center;
+  border: 1px solid #2427203b;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+.mini-work {
+  display: flex;
+  justify-content: space-between;
+  font-size: 5.5px;
+  letter-spacing: .8px;
+  border-top: 1px solid #24272025;
+  padding: 13px 0;
+}
+.mini-projects {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding-bottom: 32px;
+}
+.mini-projects img {
+  aspect-ratio: 1.32;
+  object-fit: cover;
+  width: 100%;
+  border-radius: 2px;
+}
+.mini-projects h4 {
+  font-size: 8px;
+  font-weight: 500;
+  padding-top: 9px;
+  display: flex;
+  justify-content: space-between;
+}
+.mini-projects small {
+  font-size: 4.8px;
+  letter-spacing: .6px;
+  opacity: .6;
+}
+.mini-developer {
+  --mini-accent: #c8ee9a;
+  background: #171e1b;
+  color: #e6eedf;
+}
+.mini-developer .mini-nav, .mini-developer .mini-work {
+  border-color: #e6eedf30;
+}
+.mini-developer .mini-hero h3 {
+  font-family: Consolas,monospace;
+  font-size: 5.8cqw;
+  letter-spacing: -1px;
+}
+.mini-developer .mini-hero h3>span {
+  color: #c8ee9a;
+}
+.mini-code-project {
+  background: #253a2f;
+  min-height: 170px;
+  padding: 13px;
+  font-family: Consolas,monospace;
+  position: relative;
+  overflow: hidden;
+}
+.mini-code-project>span {
+  font-size: 5px;
+  letter-spacing: 1px;
+  opacity: .7;
+}
+.code-symbol {
+  font-size: 38px;
+  color: #c8ee9a;
+  letter-spacing: 8px;
+  padding: 21px 0 13px;
+}
+.mini-code-project>p {
+  font-size: 8px;
+}
+.mini-code-project.light {
+  background: #dce8ce;
+  color: #253a2f;
+}
+.code-orbit {
+  height: 85px;
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+.code-orbit>i {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border: 1px solid #53654288;
+  border-radius: 50%;
+  transform: rotateX(60deg) rotateY(35deg);
+}
+.code-orbit>i:nth-child(2) {
+  transform: rotateX(-35deg) rotateY(60deg);
+}
+.code-orbit>i:nth-child(3) {
+  transform: rotateX(50deg) rotateY(-50deg);
+}
+.mini-editorial {
+  --mini-accent: #98412f;
+  background: #f3e9e3;
+  color: #442b27;
+}
+.mini-editorial .mini-hero h3 {
+  font-family: var(--serif);
+  font-size: 9cqw;
+  line-height: .95;
+  font-weight: 400;
+  letter-spacing: -.5px;
+}
+.mini-editorial .mini-hero h3 em {
+  font-style: italic;
+  color: inherit;
+}
+.mini-professional {
+  --mini-accent: #345adb;
+  background: #eef1f7;
+  color: #1c304f;
+}
+.mini-professional .mini-nav {
+  border-bottom: 2px solid #1c304f;
+}
+.mini-professional .mini-hero h3 {
+  font-weight: 600;
+}
+@media(max-width:800px) {
+  .mini-nav {
+    height: 45px;
+    font-size: 5px;
+  }
+  .mini-nav>b {
+    font-size: 9px;
+  }
+  .mini-hero {
+    padding: 27px 0 24px;
+  }
+  .mini-kicker {
+    font-size: 4px;
+  }
+  .mini-hero h3 {
+    letter-spacing: -1px;
+  }
+  .mini-description p {
+    font-size: 5.5px;
+    max-width: 170px;
+  }
+  .mini-description>span {
+    width: 22px;
+    height: 22px;
+    font-size: 11px;
+  }
+  .mini-code-project {
+    min-height: 125px;
+  }
+  .code-symbol {
+    font-size: 25px;
+    padding-block: 15px;
+  }
+  .mini-code-project>span {
+    font-size: 4px;
+  }
+  .mini-code-project>p {
+    font-size: 6px;
+  }
+  .code-orbit {
+    height: 60px;
+  }
+  .code-orbit>i {
+    width: 45px;
+    height: 45px;
+  }
+}

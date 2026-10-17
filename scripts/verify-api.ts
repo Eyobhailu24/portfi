@@ -1,0 +1,44 @@
+import assert from "node:assert/strict";
+import { mkdir, writeFile } from "node:fs/promises";
+import JSZip from "jszip";
+import type { Project } from "../src/shared/portfolio/schema";
+
+const base = process.env.PORTFI_TEST_URL || "http://127.0.0.1:3000";
+const first = await fetch(`${base}/api/projects`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ template: "studio" }) });
+assert.equal(first.status, 201, await first.clone().text());
+const cookie = first.headers.get("set-cookie")!.split(";")[0];
+const { project: initial } = await first.json() as { project: Project };
+const request = (url: string, init: RequestInit = {}) => fetch(`${base}${url}`, { ...init, headers: { cookie, "Content-Type": "application/json", ...init.headers } });
+const project = structuredClone(initial);
+project.name = "Verified export";
+project.pages[0].blocks[0].props.title = "Real changes.\nReally saved.";
+const saved = await request(`/api/projects/${initial.id}`, { method: "PUT", body: JSON.stringify({ project, expectedRevision: initial.revision }) });
+assert.equal(saved.status, 200, await saved.clone().text());
+const { project: next } = await saved.json() as { project: Project };
+assert.equal(next.revision, initial.revision + 1);
+assert.equal(next.pages[0].blocks[0].props.title, project.pages[0].blocks[0].props.title);
+const stale = await request(`/api/projects/${initial.id}`, { method: "PUT", body: JSON.stringify({ project, expectedRevision: initial.revision }) });
+assert.equal(stale.status, 409, "A stale write must not overwrite newer content");
+const foreign = await fetch(`${base}/api/projects/${initial.id}`);
+assert.equal(foreign.status, 404, "Another cookie-isolated workspace must not read this portfolio");
+const invalid = structuredClone(next);
+invalid.pages[0].blocks[1].props.items[0].url = "javascript:alert(1)";
+const rejected = await request(`/api/projects/${initial.id}`, { method: "PUT", body: JSON.stringify({ project: invalid, expectedRevision: next.revision }) });
+assert.equal(rejected.status, 400);
+const crossOrigin = await request(`/api/projects/${initial.id}`, { method: "PUT", headers: { origin: "https://untrusted.example" }, body: JSON.stringify({ project: next, expectedRevision: next.revision }) });
+assert.equal(crossOrigin.status, 403);
+const download = await request(`/api/projects/${initial.id}/export`, { method: "POST" });
+assert.equal(download.status, 200, await download.clone().text());
+const archive = await JSZip.loadAsync(await download.arrayBuffer());
+const output = ".portfi/verified-export";
+await mkdir(output, { recursive: true });
+for (const [name, entry] of Object.entries(archive.files)) {
+  if (entry.dir) continue;
+  assert(!name.includes(".."));
+  const file = `${output}/${name}`;
+  await mkdir(file.slice(0, file.lastIndexOf("/")), { recursive: true });
+  await writeFile(file, await entry.async("nodebuffer"));
+}
+const read = await request(`/api/projects/${initial.id}`);
+assert.equal((await read.json() as { project: Project }).project.pages[0].blocks[0].props.title, project.pages[0].blocks[0].props.title);
+console.log(JSON.stringify({ result: "PASS", checks: ["create", "save/reload", "revision conflict", "workspace isolation", "invalid URL rejection", "cross-origin rejection", "source export"], projectId: initial.id, exportDirectory: output }, null, 2));
